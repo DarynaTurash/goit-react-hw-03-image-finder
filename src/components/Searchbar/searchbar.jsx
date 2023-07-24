@@ -1,12 +1,10 @@
 import { Formik, Field, Form } from "formik";
 
 
-
-
 export const SearchBar = ({ onSubmit }) => {
    const handleSubmit = async (values, actions) => {
     try {
-        await onSubmit(values);
+        await onSubmit(values);  
         actions.setSubmitting(false);
     } catch(error) {
         console.log(error);

@@ -1,4 +1,4 @@
-// import axios from 'axios';
+import Notiflix from 'notiflix';
 
 
 
@@ -19,7 +19,14 @@ export const getMaterials = async (searchQuery) => {
     try {
       const response = await fetch(`${baseURL}key=${API_KEY}&q=${searchQuery}`);
       const data = await response.json();
-      return data.hits;
+
+      if(data.hits.length === 0) {
+        Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.");
+      } else if(searchQuery === "") {
+        Notiflix.Notify.warning('Please, write something into the search field');
+      } else {
+        return data.hits;
+      }
     } catch (error) {
       console.error('Error fetching materials:', error);
       throw error;
