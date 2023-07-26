@@ -1,37 +1,37 @@
-import { Formik, Field, Form } from "formik";
+import css from "./searchBar.module.css";
+import PropTypes from 'prop-types';
 
-
-export const SearchBar = ({ onSubmit }) => {
-   const handleSubmit = async (values, actions) => {
-    try {
-        await onSubmit(values);  
-        actions.setSubmitting(false);
-    } catch(error) {
-        console.log(error);
-    } finally {
-        actions.resetForm();
-    }
-};
+export const SearchBar = ({ onSubmit, value, onChange }) => {
+    const handleSubmit = (e) => {
+        e.preventDefault(); 
+        onSubmit(); 
+    };
 
     return (
-        <header className="searchbar">
-        <Formik initialValues={{ searchQuery: '' }} onSubmit={handleSubmit}>
-            <Form>
-                <button type="submit" className="button">
-                    <span className="button-label">Search</span>
+        <header className={css.searchbar}>
+            <form className={css.form}>
+                <button type="submit" className={css.button} onClick={handleSubmit}>
+                    <span className={css.buttonLabel}>Search</span>
                 </button>
 
-                <Field
-                className="input"
-                type="text"
-                name="searchQuery"
-                autoComplete="off"
-                autoFocus
-                placeholder="Search images and photos" />
-            </Form>
-        </Formik>
-        </header>
+                <input
+                    className={css.input}
+                    type="text"
+                    autoComplete="off"
+                    autoFocus
+                    placeholder="Search images and photos"
+                    value={value}
+                    onChange={onChange}
+                />
+            </form>
+            </header>
     );
+};
+
+SearchBar.propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+    value: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
 };
 
 

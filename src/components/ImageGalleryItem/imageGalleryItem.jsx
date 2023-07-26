@@ -1,12 +1,14 @@
 import { Modal } from "components/Modal/modal";
 import { Component } from "react";
+import css from "./imageGalleryItem.module.css";
 
 
 
 export class ImageGalleryItem extends Component {
+
     state = {
         isOpenModal: false,
-        largeImageURL: "", 
+        largeImage: "", 
     };
 
     componentDidMount() {
@@ -45,12 +47,13 @@ export class ImageGalleryItem extends Component {
 
     render() {
         const {id, webformatURL, largeImageURL} = this.props;
-        console.log(this.props);
+        const { isOpenModal, largeImage } = this.state;
+
         return (
-            <li className="gallery-item" key={id}>
-                <img src={webformatURL} alt="" onClick={() => this.handleOpenModal(largeImageURL)} />
-                {this.state.isOpenModal && (
-                    <Modal largeImage={this.state.largeImageURL} closeModal={this.handleBackdropClose} />
+            <li className={css.galleryItem} key={id}>
+                <img className={css.galleryItemImage} src={webformatURL} alt="" onClick={() => this.handleOpenModal(largeImageURL)} />
+                {isOpenModal && (
+                    <Modal largeImage={largeImage} onCloseModal={this.handleBackdropClose} />
                 )}
             </li>
         )
