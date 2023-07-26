@@ -10,11 +10,6 @@ import Notiflix from 'notiflix';
 
 
 export class App extends Component {
-  constructor(props) {
-    super(props);
-    this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
-  }
-
   state = {
     materials: [],
     status: 'idle',

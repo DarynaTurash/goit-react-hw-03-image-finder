@@ -47,13 +47,13 @@ export class ImageGalleryItem extends Component {
 
     render() {
         const {id, webformatURL, largeImageURL} = this.props;
-        const { isOpenModal, largeImage } = this.state;
+        const { isOpenModal } = this.state;
 
         return (
             <li className={css.galleryItem} key={id}>
                 <img className={css.galleryItemImage} src={webformatURL} alt="" onClick={() => this.handleOpenModal(largeImageURL)} />
                 {isOpenModal && (
-                    <Modal largeImage={largeImage} onCloseModal={this.handleBackdropClose} />
+                    <Modal largeImage={largeImageURL} onCloseModal={this.handleBackdropClose} />
                 )}
             </li>
         )
