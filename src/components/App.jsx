@@ -6,6 +6,7 @@ import { ImageGallery } from "./ImageGallery/imageGallery";
 
 import { Loader } from "./Loader/loader";
 import { LoadMore } from "components/ButtonLoadMore/buttonLoadMore";
+import Notiflix from 'notiflix';
 
 
 export class App extends Component {
@@ -39,12 +40,17 @@ export class App extends Component {
 
     try {
 
+      if(searchQuery === "") {
+        Notiflix.Notify.warning('Please, write something into the search field');
+        return;
+      };
+
       this.setState({
         status: 'pending',
       });
 
       const imageData = await getMaterials(searchQuery, page);
-
+      
       this.setState({
         materials: [...imageData.hits], 
         status: 'resolved',

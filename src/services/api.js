@@ -11,8 +11,6 @@ export const getMaterials = async (searchQuery, page) => {
 
       if(data.hits.length === 0) {
         Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.");
-      } else if(searchQuery === "") {
-        Notiflix.Notify.warning('Please, write something into the search field');
       } else if(page === Math.ceil(data.totalHits / PER_PAGE)) {
         Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
       };
